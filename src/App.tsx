@@ -3,7 +3,7 @@ import './App.scss';
 import OperationButton from "./components/OperationButton"
 import Container from "react-bootstrap/Container";
 import NumericButton from "./components/NumericButton";
-import {add_numeric, add_operation, add_point, calculate} from "./reducers/calculator";
+import {add_numeric, add_operation, add_point, backspace, calculate, reset} from "./reducers/calculator";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "./reducers";
 
@@ -23,14 +23,20 @@ function App() {
     const onAddPoint = () => {
         dispatch(add_point())
     }
+    const onReset = () => {
+        dispatch(reset())
+    }
+    const onBackspace = () => {
+        dispatch(backspace())
+    }
 
     return (
         <div className="main">
             <Container>
                 <p>{calculator_value}</p>
                 <div className={"btn_group"}>
-                    <button className={"btn_init"}>AC</button>
-                    <button className={"btn_init"}>←</button>
+                    <button className={"btn_init"} onClick={onReset}>AC</button>
+                    <button className={"btn_init"} onClick={onBackspace}>←</button>
                     <button className={"btn_init"}>%</button>
                     <OperationButton value="÷" onAddOperation={onAddOperation}/>
                 </div>
